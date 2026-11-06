@@ -13,30 +13,13 @@ An embedded, 100% offline Internet of Things (IoT) desk assistant designed to ma
 
 ## 📸 Prototype & Visual Showcase
 
-<div align="center">
-  <table style="width: 100%; border: none;">
-    <tr>
-      <td align="center" width="50%">
-        <img src="docs/images/prototype_overview.jpg" alt="Assembled Hardware Prototype" width="100%"/>
-        <br/><b>Assembled Desk Assistant Prototype</b>
-      </td>
-      <td align="center" width="50%">
-        <img src="docs/images/oled_display.jpg" alt="OLED Display in Action" width="100%"/>
-        <br/><b>OLED Real-Time Reminder Alert & Status</b>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" width="50%">
-        <img src="docs/images/wiring_diagram.png" alt="ESP32 Wiring Schematic" width="100%"/>
-        <br/><b>Pin Connection & Wiring Schematic</b>
-      </td>
-      <td align="center" width="50%">
-        <img src="docs/images/circuit_detail.jpg" alt="Circuit Detail & Push Buttons" width="100%"/>
-        <br/><b>Breadboard Layout with Push Buttons & Buzzer</b>
-      </td>
-    </tr>
-  </table>
-</div>
+| Assembled Desk Assistant Prototype | OLED Real-Time Reminder Alert & Status |
+| :---: | :---: |
+| ![Assembled Hardware Prototype](docs/images/prototype_overview.jpg) | ![OLED Display in Action](docs/images/oled_display.jpg) |
+
+| Pin Connection & Wiring Schematic | Breadboard Layout with Push Buttons & Buzzer |
+| :---: | :---: |
+| ![ESP32 Wiring Schematic](docs/images/wiring_diagram.png) | ![Circuit Detail & Push Buttons](docs/images/circuit_detail.jpg) |
 
 ---
 
@@ -72,17 +55,17 @@ flowchart TD
     subgraph ESP32 ["ESP32 Edge Microcontroller"]
         AP["Wi-Fi Access Point (SSID: SmartReminder)"]
         WS["Embedded Web Server (Port 80)"]
-        FS[("LittleFS Flash (/reminders.json)")]
+        FS[("LittleFS Flash: reminders.json")]
         Clock["System RTC (Internal / DS3231)"]
         Scheduler["Core Alert Scheduler Engine"]
     end
 
     subgraph Peripherals ["Physical Hardware Interface"]
-        OLED["0.96\" I2C OLED (SSD1306 - 128x64)"]
+        OLED["0.96-inch I2C OLED (SSD1306 128x64)"]
         Buzzer["Passive Piezo Buzzer (LEDC PWM)"]
-        BTN1["STOP Button (GPIO27 - Red)"]
-        BTN2["SNOOZE Button (GPIO26 - Yellow)"]
-        BTN3["MENU Button (GPIO25 - Green)"]
+        BTN1["STOP Button (GPIO 27 - Red)"]
+        BTN2["SNOOZE Button (GPIO 26 - Yellow)"]
+        BTN3["MENU Button (GPIO 25 - Green)"]
     end
 
     Browser <==>|Local Wi-Fi Connection| AP
@@ -218,7 +201,7 @@ The system has undergone thorough hardware verification against a 14-case test c
 | **TC-07** | STOP during silent gap | Works during the 5-minute quiet gap between alert slots; prevents subsequent alarms. |
 | **TC-08** | SNOOZE action | Silences current alarm; restarts alert sequence 10 minutes later. |
 | **TC-09** | Unattended alert timeout | After 3 ringing attempts (total 10m 30s), event is automatically tagged `MISSED`. |
-| **TC-10** | OLED page navigation | MENU button cycles: Next Reminder $\to$ Agenda $\to$ System Info. |
+| **TC-10** | OLED page navigation | MENU button cycles: Next Reminder → Agenda → System Info. |
 | **TC-11** | Weekly recurring reminders | Successfully advances start timestamp by 7 days upon completion. |
 | **TC-12** | Power cycle persistence | Reminders and completed states persist in LittleFS across sudden power disconnects. |
 | **TC-13** | Simultaneous reminders | Scheduler prioritizes earliest record; queues subsequent alerts cleanly. |
