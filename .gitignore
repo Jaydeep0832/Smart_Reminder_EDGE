@@ -1,0 +1,24 @@
+# Compilation artifacts
+*.hex
+*.bin
+*.elf
+*.o
+*.a
+*.d
+*.map
+build/
+.pio/
+.pioenvs/
+
+# Editor and OS settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
